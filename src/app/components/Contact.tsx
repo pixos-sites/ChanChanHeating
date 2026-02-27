@@ -75,14 +75,14 @@ export function Contact() {
 
             <div className="mt-10 space-y-5">
               <a
-                href="tel:07529953972"
+                href="tel:07453365352"
                 className="flex items-center gap-4 group"
               >
                 <div className="w-11 h-11 bg-[#D96A1B]/10 rounded-xl flex items-center justify-center group-hover:bg-[#D96A1B]/20 transition-colors">
                   <Phone size={20} className="text-[#D96A1B]" />
                 </div>
                 <span className="font-['DM_Sans'] text-[#1F2328] text-[0.95rem] group-hover:text-[#D96A1B] transition-colors">
-                  07529 953972
+                  07453 365352
                 </span>
               </a>
               <a

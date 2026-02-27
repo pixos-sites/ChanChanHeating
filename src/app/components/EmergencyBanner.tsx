@@ -11,15 +11,15 @@ export function EmergencyBanner() {
           🔧 Emergency callouts —
         </span>
         <a
-          href="tel:07529953972"
+          href="tel:07453365352"
           className="inline-flex items-center justify-center gap-1.5 font-['DM_Sans'] text-[0.8rem] sm:text-[0.85rem] hover:underline max-w-full"
         >
           <span className="relative flex items-center justify-center">
             <span className="absolute inline-flex h-full w-full rounded-full bg-white/30 animate-ping" />
             <Phone size={14} className="relative" />
           </span>
-          <span className="sm:hidden">Call: 07529 953972</span>
-          <span className="hidden sm:inline">Call now: 07529 953972</span>
+          <span className="sm:hidden">Call: 07453 365352</span>
+          <span className="hidden sm:inline">Call now: 07453 365352</span>
         </a>
       </div>
     </div>

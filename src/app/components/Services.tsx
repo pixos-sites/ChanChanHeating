@@ -41,15 +41,34 @@ const services = [
   },
 ];
 
+const sectionReveal = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+const cardsContainer = {
+  hidden: {},
+  visible: {
+    transition: { delayChildren: 0.1, staggerChildren: 0.07 },
+  },
+};
+
+const cardItem = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
 export function Services() {
   return (
     <section id="services" className="py-24 lg:py-32 bg-[#F7F3EC]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          variants={sectionReveal}
           className="text-center mb-14"
         >
           <div className="inline-flex items-center gap-2 mb-4">
@@ -67,10 +86,14 @@ export function Services() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          variants={cardsContainer}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {services.map((service) => (
-            <div
+            <motion.div
               key={service.title}
+              variants={cardItem}
               className="bg-white rounded-xl p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group cursor-default"
             >
               <div className="w-12 h-12 bg-[#D96A1B]/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#D96A1B]/20 transition-colors">
@@ -82,10 +105,10 @@ export function Services() {
               <p className="font-['DM_Sans'] text-[#5F6F80] text-[0.9rem] leading-relaxed">
                 {service.desc}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

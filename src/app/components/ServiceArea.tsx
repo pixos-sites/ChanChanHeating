@@ -12,6 +12,23 @@ const areas = [
   "Surrounding Areas",
 ];
 
+const sectionReveal = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+const pillsContainer = {
+  hidden: {},
+  visible: {
+    transition: { delayChildren: 0.1, staggerChildren: 0.045 },
+  },
+};
+
+const pillItem = {
+  hidden: { opacity: 0, y: 10, scale: 0.985 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.3, ease: "easeOut" } },
+};
+
 export function ServiceArea() {
   return (
     <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
@@ -35,12 +52,14 @@ export function ServiceArea() {
         </svg>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          variants={sectionReveal}
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 mb-4">
@@ -56,23 +75,21 @@ export function ServiceArea() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
+          variants={pillsContainer}
           className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto"
         >
           {areas.map((area) => (
-            <span
+            <motion.span
               key={area}
+              variants={pillItem}
               className="inline-flex items-center gap-2 bg-[#F7F3EC] border border-[#1F2328]/8 rounded-full px-5 py-2.5 font-['DM_Sans'] text-[#1F2328] text-[0.9rem] hover:border-[#D96A1B]/40 hover:bg-[#D96A1B]/5 transition-all cursor-default"
             >
               <MapPin size={14} className="text-[#D96A1B]" />
               {area}
-            </span>
+            </motion.span>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
