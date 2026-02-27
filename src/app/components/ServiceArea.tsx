@@ -1,5 +1,5 @@
-import { motion } from "motion/react";
 import { MapPin } from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const areas = [
   "Glasgow",
@@ -12,12 +12,10 @@ const areas = [
   "Surrounding Areas",
 ];
 
-const sectionReveal = {
-  hidden: { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
-};
-
 export function ServiceArea() {
+  const headingReveal = useScrollReveal({ threshold: 0.12 });
+  const pillsReveal = useScrollReveal({ threshold: 0.1, rootMargin: "0px 0px -8% 0px" });
+
   return (
     <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
       {/* Abstract Glasgow watermark */}
@@ -40,15 +38,10 @@ export function ServiceArea() {
         </svg>
       </div>
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        <motion.div
-          variants={sectionReveal}
-          className="text-center mb-12"
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          ref={headingReveal.ref as any}
+          className={`text-center mb-12 reveal-fade ${headingReveal.isVisible ? "is-visible" : ""}`}
         >
           <div className="inline-flex items-center gap-2 mb-4">
             <MapPin size={20} className="text-[#D96A1B]" />
@@ -60,26 +53,22 @@ export function ServiceArea() {
             Covering Glasgow
             <br className="hidden sm:block" /> & Surrounding Areas
           </h2>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ delay: 0.08, duration: 0.35, ease: "easeOut" }}
-          className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto"
-        >
-          {areas.map((area) => (
+        <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+          {areas.map((area, i) => (
             <span
+              ref={i === 0 ? (pillsReveal.ref as any) : undefined}
               key={area}
-              className="inline-flex items-center gap-2 bg-[#F7F3EC] border border-[#1F2328]/8 rounded-full px-5 py-2.5 font-['DM_Sans'] text-[#1F2328] text-[0.9rem] hover:border-[#D96A1B]/40 hover:bg-[#D96A1B]/5 transition-all cursor-default"
+              className={`inline-flex items-center gap-2 bg-[#F7F3EC] border border-[#1F2328]/8 rounded-full px-5 py-2.5 font-['DM_Sans'] text-[#1F2328] text-[0.9rem] hover:border-[#D96A1B]/40 hover:bg-[#D96A1B]/5 transition-all cursor-default reveal-item ${pillsReveal.isVisible ? "is-visible" : ""}`}
+              style={{ transitionDelay: `${i * 55}ms` }}
             >
               <MapPin size={14} className="text-[#D96A1B]" />
               {area}
             </span>
           ))}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

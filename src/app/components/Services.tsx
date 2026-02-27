@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import {
   Flame,
   Wrench,
@@ -7,6 +6,7 @@ import {
   ShieldCheck,
   ChefHat,
 } from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const services = [
   {
@@ -42,15 +42,15 @@ const services = [
 ];
 
 export function Services() {
+  const headingReveal = useScrollReveal({ threshold: 0.12 });
+  const cardsReveal = useScrollReveal({ threshold: 0.08, rootMargin: "0px 0px -6% 0px" });
+
   return (
     <section id="services" className="py-24 lg:py-32 bg-[#F7F3EC]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-          className="text-center mb-14"
+        <div
+          ref={headingReveal.ref as any}
+          className={`text-center mb-14 reveal-fade ${headingReveal.isVisible ? "is-visible" : ""}`}
         >
           <div className="inline-flex items-center gap-2 mb-4">
             <Settings size={20} className="text-[#D96A1B]" />
@@ -65,17 +65,15 @@ export function Services() {
             Professional gas, boiler and heating services for homeowners and
             landlords across Glasgow and surrounding areas.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, i) => (
-            <motion.div
+            <div
+              ref={i === 0 ? (cardsReveal.ref as any) : undefined}
               key={service.title}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.18, margin: "0px 0px -8% 0px" }}
-              transition={{ delay: i * 0.06, duration: 0.38, ease: "easeOut" }}
-              className="bg-white rounded-xl p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group cursor-default"
+              className={`bg-white rounded-xl p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group cursor-default reveal-item ${cardsReveal.isVisible ? "is-visible" : ""}`}
+              style={{ transitionDelay: `${i * 70}ms` }}
             >
               <div className="w-12 h-12 bg-[#D96A1B]/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#D96A1B]/20 transition-colors">
                 <service.icon size={24} className="text-[#D96A1B]" />
@@ -86,7 +84,7 @@ export function Services() {
               <p className="font-['DM_Sans'] text-[#5F6F80] text-[0.9rem] leading-relaxed">
                 {service.desc}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

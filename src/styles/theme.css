@@ -144,6 +144,30 @@
     max-width: 100%;
   }
 
+  .reveal-fade,
+  .reveal-item {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+    transition: opacity 360ms ease, transform 360ms ease;
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+  }
+
+  .reveal-fade.is-visible,
+  .reveal-item.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-fade,
+    .reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   h1 {
     font-size: var(--text-2xl);
     font-weight: var(--font-weight-medium);
