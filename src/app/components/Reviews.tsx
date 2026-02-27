@@ -65,7 +65,7 @@ export function Reviews() {
         </motion.div>
 
         {/* Cards - horizontal scroll on mobile */}
-        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:overflow-visible md:pb-0 scrollbar-hide">
+        <div className="flex gap-6 overflow-x-auto overscroll-x-contain pb-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:overflow-visible md:pb-0 scrollbar-hide">
           {reviews.map((review, i) => (
             <motion.div
               key={review.name}
@@ -73,7 +73,7 @@ export function Reviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="bg-white rounded-xl p-7 shadow-sm min-w-[300px] md:min-w-0 snap-center flex flex-col"
+              className="bg-white rounded-xl p-7 shadow-sm min-w-[85vw] max-w-[85vw] sm:min-w-[300px] sm:max-w-none md:min-w-0 snap-center flex flex-col"
             >
               <Stars />
               <p className="font-['DM_Sans'] text-[#0D1B2A]/80 text-[0.9rem] leading-relaxed mt-4 flex-1">
