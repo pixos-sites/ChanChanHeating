@@ -12,7 +12,7 @@ import { Footer } from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#F7F3EC] font-['DM_Sans'] overflow-x-clip">
+    <div className="min-h-screen bg-[#F7F3EC] font-['DM_Sans'] overflow-x-hidden">
       <Navbar />
       <EmergencyBanner />
       <Hero />

@@ -41,11 +41,6 @@ const services = [
   },
 ];
 
-const sectionReveal = {
-  hidden: { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
-};
-
 const cardsContainer = {
   hidden: {},
   visible: {
@@ -61,14 +56,12 @@ const cardItem = {
 export function Services() {
   return (
     <section id="services" className="py-24 lg:py-32 bg-[#F7F3EC]">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-      >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          variants={sectionReveal}
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
           className="text-center mb-14"
         >
           <div className="inline-flex items-center gap-2 mb-4">
@@ -88,6 +81,9 @@ export function Services() {
 
         <motion.div
           variants={cardsContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.35 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {services.map((service) => (
@@ -108,7 +104,7 @@ export function Services() {
             </motion.div>
           ))}
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
