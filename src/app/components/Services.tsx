@@ -41,18 +41,6 @@ const services = [
   },
 ];
 
-const cardsContainer = {
-  hidden: {},
-  visible: {
-    transition: { delayChildren: 0.1, staggerChildren: 0.07 },
-  },
-};
-
-const cardItem = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
-};
-
 export function Services() {
   return (
     <section id="services" className="py-24 lg:py-32 bg-[#F7F3EC]">
@@ -79,17 +67,14 @@ export function Services() {
           </p>
         </motion.div>
 
-        <motion.div
-          variants={cardsContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.35 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {services.map((service) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, i) => (
             <motion.div
               key={service.title}
-              variants={cardItem}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.18, margin: "0px 0px -8% 0px" }}
+              transition={{ delay: i * 0.06, duration: 0.38, ease: "easeOut" }}
               className="bg-white rounded-xl p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group cursor-default"
             >
               <div className="w-12 h-12 bg-[#D96A1B]/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#D96A1B]/20 transition-colors">
@@ -103,7 +88,7 @@ export function Services() {
               </p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
