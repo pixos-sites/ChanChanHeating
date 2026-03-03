@@ -15,7 +15,7 @@
 - Source reviewed: `https://www.checkatrade.com/trades/chanchanheating`
 - Location: Glasgow
 - Owner: Mr Chun Kui Chan
-- Phone: 07453365352
+- Phone: 07529953972
 - Email: dannyboycck@gmail.com
 
 ## Services Included
